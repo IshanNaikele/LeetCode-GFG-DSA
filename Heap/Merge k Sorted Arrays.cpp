@@ -19,7 +19,7 @@ class Solution {
         {
             element=pq.top();
             ans.push_back(element.first);
-            pq.pop();
+            pq.pop();  
             i=element.second.first;
             j=element.second.second;
             if(j+1<mat[0].size())
