@@ -33,5 +33,5 @@ class Solution {
         inOrder(root,ans);
         int index=0;
         postOrder(root,ans,index);
-    }
+    }   
 };
