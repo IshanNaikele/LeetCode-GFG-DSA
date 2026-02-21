@@ -11,3 +11,4 @@ int Solution::nchoc(int A, vector<int> &B)
      }
      return int(maxChoco%mod);
 }
+           
