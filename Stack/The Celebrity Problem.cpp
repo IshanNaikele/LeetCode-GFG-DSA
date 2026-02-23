@@ -31,3 +31,40 @@ class Solution {
         return ind;
     }
 };
+
+//Approach 2 :
+class Solution {
+  public:
+    int celebrity(vector<vector<int>>& mat) 
+    {
+        // code here
+        int n=mat.size();
+        stack<int>st;
+        for(int i=0;i<n;i++)       st.push(i);
+        
+        while(st.size()>1) 
+        {
+            int first=st.top();
+            st.pop();
+            int second=st.top();
+            st.pop();
+            
+            if(mat[first][second]==1) 
+            st.push(second);
+            else
+            st.push(first);
+        }
+        
+        if(st.empty()) return -1;
+        int top=st.top();
+        int row=0,col=0;
+        for(int i=0;i<n;i++)
+        {
+            row+=mat[top][i];
+            col+=mat[i][top];
+        }
+        
+        if(row==1 && col==n)  return top;
+        return -1;
+    }
+};
