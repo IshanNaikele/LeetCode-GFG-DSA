@@ -67,4 +67,4 @@ class Solution {
         if(row==1 && col==n)  return top;
         return -1;
     }
-};
+};   
