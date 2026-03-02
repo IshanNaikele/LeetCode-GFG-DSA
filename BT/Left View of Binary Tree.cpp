@@ -46,3 +46,45 @@ class Solution {
     }
 };
 
+
+//Approach 2 :Using Recursion 
+
+/*
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+*/
+
+class Solution {
+  public:
+    void LView(Node *root,vector<int>&ans,int level)
+    {
+        if(root==NULL) return  ;
+        if(ans.size()==level)
+        ans.push_back(root->data );
+        level++;
+        LView(root->left,ans,level);
+        LView(root->right,ans,level);
+        
+    }
+    vector<int> leftView(Node *root) 
+    {
+        // code here
+        
+        vector<int>ans;
+        if(root==NULL) return ans;
+        int level=0;
+        LView(root,ans,level);
+        return ans;
+        
+    }
+};
