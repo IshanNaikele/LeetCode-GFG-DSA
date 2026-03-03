@@ -9,7 +9,7 @@ public:
             long long gift=pq.top();
             pq.pop();
             pq.push(sqrt(gift));
-        }
+        }   
         long long total_gifts=0;
         while(!pq.empty())
         {
