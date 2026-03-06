@@ -22,7 +22,7 @@ class Solution {
     }
 };
 
-class Solution {
+class Solution {  
   public:
     int kthSmallest(vector<int> &arr, int k) 
     {
