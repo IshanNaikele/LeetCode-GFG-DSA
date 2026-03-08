@@ -11,3 +11,4 @@ int Solution::solve(vector<int> &A, int B)
     }
     return profit;
 }
+   
