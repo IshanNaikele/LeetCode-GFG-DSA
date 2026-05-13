@@ -53,5 +53,5 @@ public:
         solve(0,n,ans,board,column);
 
         return ans; 
-    }
+    }     
 };  
