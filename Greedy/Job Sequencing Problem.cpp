@@ -38,3 +38,5 @@ class Solution {
         return {total,prof};
     }
 };
+
+    
