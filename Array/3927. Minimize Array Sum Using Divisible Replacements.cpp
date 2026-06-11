@@ -28,3 +28,33 @@ public:
         return sum;
     }
 };
+
+class Solution {
+public:
+    long long minArraySum(vector<int>& nums) 
+    {
+        int maxElement=INT_MIN;
+        for(int num:nums) maxElement=max(maxElement,num);
+
+        vector<long long>store(maxElement+1,0);
+        for(int num:nums)
+           store[num]++;
+        
+        long long sum=0;
+        int n=store.size();
+        for(int i=0;i<n;i++)
+        {
+            if(store[i]==0) continue;
+            long long ele=i;
+            for(long long  curr=ele;curr<=maxElement;curr+=ele)
+            {
+                if(store[curr]>0)
+                {
+                    sum+=(store[curr]*ele);
+                    store[curr]=0;
+                }
+            }
+        }
+        return sum;
+    }
+};
