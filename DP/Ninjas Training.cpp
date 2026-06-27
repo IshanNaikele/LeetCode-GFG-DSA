@@ -125,3 +125,52 @@ int ninjaTraining(int n, vector<vector<int>> &points)
     });
     
 }
+
+//Space Optimization 
+#include<iostream>
+#include<algorithm>
+#include<vector>
+ 
+int ninjaTraining(int n, vector<vector<int>> &points)
+{
+    // Write your code here.
+     
+
+
+    // Base
+    int first=points[0][0];
+    int second=points[0][1];
+    int third=points[0][2];
+    
+
+
+    for(int day=1; day<n; day++)
+    {
+        int one=points[day][0]
+                  + max(second,
+                        third);
+
+
+        int two=points[day][1]
+                  + max(first,
+                        third);
+
+
+        int three=points[day][2]
+                  + max(first,
+                        second);
+
+
+        first=one;
+        second=two;
+        third=three;
+    }
+
+
+    return max({
+        first,
+        second,
+        third
+    });
+    
+}
