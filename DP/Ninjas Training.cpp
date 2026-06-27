@@ -83,3 +83,45 @@ int ninjaTraining(int n, vector<vector<int>> &points)
     
 }
 
+//Tabulation 
+#include<iostream>
+#include<algorithm>
+#include<vector>
+ 
+int ninjaTraining(int n, vector<vector<int>> &points)
+{
+    // Write your code here.
+    vector<vector<int>> dp(n, vector<int>(3));
+
+
+    // Base
+    dp[0][0]=points[0][0];
+    dp[0][1]=points[0][1];
+    dp[0][2]=points[0][2];
+
+
+    for(int day=1; day<n; day++)
+    {
+        dp[day][0]=points[day][0]
+                  + max(dp[day-1][1],
+                        dp[day-1][2]);
+
+
+        dp[day][1]=points[day][1]
+                  + max(dp[day-1][0],
+                        dp[day-1][2]);
+
+
+        dp[day][2]=points[day][2]
+                  + max(dp[day-1][0],
+                        dp[day-1][1]);
+    }
+
+
+    return max({
+        dp[n-1][0],
+        dp[n-1][1],
+        dp[n-1][2]
+    });
+    
+}
