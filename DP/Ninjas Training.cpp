@@ -39,3 +39,47 @@ int ninjaTraining(int n, vector<vector<int>> &points)
     
 }
 
+//Memoization 
+#include<iostream>
+#include<algorithm>
+#include<vector>
+int solve(vector<vector<int>> &points,vector<vector<int>>&dp ,int row,int col)
+{
+    int n=points.size();
+    int colChoice1,colChoice2;
+    if(row<0) return 0;
+    if(dp[row][col]!=-1) return dp[row][col];
+    if(col==0)
+    {
+        colChoice1=1;
+        colChoice2=2;
+    }
+    else if(col==1)
+    {
+        colChoice1=0;
+        colChoice2=2;
+    }
+    else
+    {
+        colChoice1=0;
+        colChoice2=1;
+    }
+    return dp[row][col]=points[row][col] +
+           max(
+               solve(points,dp,row-1,colChoice1),
+               solve(points,dp,row-1,colChoice2)
+           );
+}
+
+
+int ninjaTraining(int n, vector<vector<int>> &points)
+{
+    // Write your code here.
+    vector<vector<int>>dp(n,vector<int>(3,-1));
+    return max({solve(points,dp,n-1,0),
+                solve(points,dp,n-1,1),
+                solve(points,dp,n-1,2)
+                });
+    
+}
+
