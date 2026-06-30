@@ -123,5 +123,5 @@ public:
             minSum=min(minSum,prev[i]);
 
         return minSum;
-    }
+    }  
 };
