@@ -122,3 +122,56 @@ public:
         return  dp[0][0][n-1] ;
     }
 };
+
+//Space Optimized
+
+class Solution 
+{
+public:
+
+    int cherryPickup(vector<vector<int>>& grid) 
+    {
+        int m=grid.size(),n=grid[0].size();
+        vector<vector<int>>front(n,vector<int>(n,-1));
+        for(int j1=0;j1<n;j1++)
+        {
+            for(int j2=0;j2<n;j2++)
+            {
+                if(j1==j2)
+                front[j1][j2]=grid[m-1][j1];
+                else
+                front[j1][j2]=grid[m-1][j1]+grid[m-1][j2];
+            }
+        }
+        
+
+        for(int i=m-2;i>=0;i--)
+        {
+            vector<vector<int>>curr(n,vector<int>(n,-1));
+            for(int j1=0;j1<n;j1++)
+            {
+                for(int j2=0;j2<n;j2++)
+                {
+                    int maxCherries=0; 
+                    for(int dj1=-1;dj1<2;dj1++)
+                        {
+                            for(int dj2=-1;dj2<2;dj2++)
+                            {
+                                int value=0;
+                                if(j1+dj1<0 || j1+dj1>=n || j2+dj2<0 || j2+dj2>=n ) continue;
+                                if(j1==j2) value=grid[i][j1];
+                                else       value=grid[i][j1]+grid[i][j2];
+
+                                value+=front[j1+dj1][j2+dj2];
+
+                                maxCherries=max(maxCherries,value);
+                            }
+                        }
+                    curr[j1][j2]=maxCherries;
+                }
+            }
+            front=curr;
+        }
+        return  front[0][n-1];
+    }
+};
