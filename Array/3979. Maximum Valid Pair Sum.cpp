@@ -11,5 +11,5 @@ public:
             maxNum=max(maxNum,nums[start]);
         }
         return maxSum;
-    }
+    }   
 };
