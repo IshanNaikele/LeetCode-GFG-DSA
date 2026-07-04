@@ -24,4 +24,4 @@ public:
     {
         return atMostKDistinct(nums,k)-atMostKDistinct(nums,k-1);
     }
-};
+};    
