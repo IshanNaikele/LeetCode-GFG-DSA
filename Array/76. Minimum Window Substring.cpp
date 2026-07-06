@@ -40,3 +40,42 @@ public:
         return s.substr(start,end-start+1);
     }
 };
+
+class Solution {
+public:
+    string minWindow(string s, string t) 
+    {
+        if(s.size()<t.size()) return "";
+        int n=s.size(),left=0;
+        int minLen=-1,charReqd=t.size();
+        int start=-1,end=-1;
+        unordered_map<char,int>mpp1,mpp2;
+        for(char ch:t) mpp1[ch]++;
+        
+        for(int right=0;right<n;right++)
+        {
+            if(mpp1.find(s[right])!=mpp1.end())
+            {
+                if(mpp1[s[right]]>mpp2[s[right]]) charReqd--;
+                mpp2[s[right]]++;
+            }
+            while(charReqd==0)
+            {
+                if(start==-1 || (end-start)>(right-left))
+                {
+                    start=left;
+                    end=right;
+                }
+                if(mpp1.find(s[left])!=mpp1.end())
+                {
+                    mpp2[s[left]]--;
+                    if(mpp2[s[left]]<mpp1[s[left]])
+                    charReqd++;
+                }
+                left++;
+            }
+        }
+        if(start==-1 || end==-1) return "";
+        return s.substr(start,end-start+1);
+    }
+};
