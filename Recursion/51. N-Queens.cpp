@@ -55,3 +55,48 @@ public:
         return ans; 
     }     
 };  
+
+
+//Approach 2 :- 
+
+
+class Solution 
+{
+public:
+
+    void find(int row,int n,vector<vector<string>>&ans,vector<string>&board,vector<int>column,vector<bool>&leftDig,vector<bool>&rightDig)
+    {
+        if(row==n) 
+        {
+            ans.push_back(board);
+            return ;
+        }
+
+        for(int col=0;col<n;col++)
+        {
+            if(column[col]!=1 && leftDig[col-row+n-1]==0 && rightDig[row+col]==0)
+            {
+                column[col]=1;
+                board[row][col]='Q';
+                leftDig[col-row+n-1]=1;
+                rightDig[row+col]=1;
+                find(row+1,n,ans,board,column,leftDig,rightDig);
+                column[col]=0;
+                board[row][col]='.';
+                leftDig[col-row+n-1]=0;
+                rightDig[row+col]=0;
+            }
+        }
+    }
+
+    vector<vector<string>> solveNQueens(int n) 
+    {
+        vector<vector<string>>ans;
+        vector<string>board(n,string(n,'.'));
+        vector<int>column(n,0);
+        vector<bool>leftDig((n*2)-1,0);
+        vector<bool>rightDig((n*2)-1,0);
+        find(0,n,ans,board,column,leftDig,rightDig);
+        return ans;
+    }
+};
