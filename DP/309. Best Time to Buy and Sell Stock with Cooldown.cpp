@@ -1,54 +1,131 @@
+//Recursion
 class Solution {
 public:
-    int t[5001][2];
-    int solve(vector<int>prices,int day,bool buy)
+    int solve(vector<int>&prices,int index,int buy)
     {
-        int n=prices.size(),profit=0;
-        if(day>=n) return 0;
-        
-        if(t[day][buy]!=-1) return t[day][buy];
+        int n=prices.size();
+        if(index>=n) return 0;
+        int profit=0;
         if(buy)
-        {
-            int take=solve(prices,day+1,false)-prices[day];
-            int notTake=solve(prices,day+1,true);
-            profit=max({profit,take,notTake});
-        }
+          profit=max(-prices[index]+solve(prices,index+1,0),solve(prices,index+1,1));
         else
-        {
-            int sell=prices[day]+solve(prices,day+2,true);
-            int notSell=solve(prices,day+1,false);
-            profit=max({profit,sell,notSell});
-        }
-        return t[day][buy]=profit;
+          profit=max(prices[index]+solve(prices,index+2,1),solve(prices,index+1,0));
+
+
+        return profit;
     }
-    int maxProfit(vector<int>& prices) 
+    int maxProfit(vector<int>& prices)
     {
-        memset(t,-1,sizeof(t));
-        return solve(prices,0,true);
+        return solve(prices,0,1);
     }
 };
 
-
- class Solution {
+//Memoization
+class Solution {
 public:
-     
-    int maxProfit(vector<int>& prices) 
+    int solve(vector<int>&prices,int index,int buy,vector<vector<long long>>&dp)
     {
         int n=prices.size();
-        if(n==0 || n==1) return 0;
-        vector<int>t(n,0);
-        t[0]=0;
-        t[1]=max(prices[1]-prices[0],0);
-        for(int i=2;i<n;i++)
+        if(index>=n) return 0;
+        if(dp[index][buy]!=-1) return dp[index][buy];
+        int profit=0;
+        if(buy)
+          profit=max(-prices[index]+solve(prices,index+1,0,dp),solve(prices,index+1,1,dp));
+        else
+          profit=max(prices[index]+solve(prices,index+2,1,dp),solve(prices,index+1,0,dp));
+
+
+        return dp[index][buy]=profit;
+    }
+    int maxProfit(vector<int>& prices)
+    {
+        int n=prices.size();
+        vector<vector<long long>>dp(n,vector<long long>(2,-1));
+        return solve(prices,0,1,dp);
+    }
+};
+
+//Tabulation 
+class Solution {
+public:
+    int solve(vector<int>&prices,int index,int buy,vector<vector<long long>>&dp)
+    {
+        int n=prices.size();
+        if(index>=n) return 0;
+        if(dp[index][buy]!=-1) return dp[index][buy];
+        int profit=0;
+        if(buy)
+          profit=max(-prices[index]+solve(prices,index+1,0,dp),solve(prices,index+1,1,dp));
+        else
+          profit=max(prices[index]+solve(prices,index+2,1,dp),solve(prices,index+1,0,dp));
+
+
+        return dp[index][buy]=profit;
+    }
+    int maxProfit(vector<int>& prices)
+    {
+        int n=prices.size();
+        vector<vector<long long>>dp(n+2,vector<long long>(2,0));
+
+
+        for(int index=n-1;index>=0;index--)
         {
-            t[i]=t[i-1];
-            for(int j=0;j<i;j++)
+            for(int buy=0;buy<=1;buy++)
             {
-                int todayProfit=prices[i]-prices[j];
-                int prevProfit=j>1?t[j-2]:0;
-                t[i]=max(t[i],todayProfit+prevProfit);
+                int profit=0;
+                if(buy)
+                profit=max(-prices[index]+dp[index+1][0],dp[index+1][1]);
+                else
+                profit=max(prices[index]+dp[index+2][1],dp[index+1][0]);
+
+
+                dp[index][buy]=profit;
             }
         }
-        return t[n-1];
+        return dp[0][1];
+    }
+};
+
+//Space Optimized
+class Solution {
+public:
+    int solve(vector<int>&prices,int index,int buy,vector<vector<long long>>&dp)
+    {
+        int n=prices.size();
+        if(index>=n) return 0;
+        if(dp[index][buy]!=-1) return dp[index][buy];
+        int profit=0;
+        if(buy)
+          profit=max(-prices[index]+solve(prices,index+1,0,dp),solve(prices,index+1,1,dp));
+        else
+          profit=max(prices[index]+solve(prices,index+2,1,dp),solve(prices,index+1,0,dp));
+
+
+        return dp[index][buy]=profit;
+    }
+    int maxProfit(vector<int>& prices)
+    {
+        int n=prices.size();
+        vector<long long>prev(2,0);
+        vector<long long>curr1(2,0);
+        vector<long long>curr2(2,0);
+        for(int index=n-1;index>=0;index--)
+        {
+            for(int buy=0;buy<=1;buy++)
+            {
+                int profit=0;
+                if(buy)
+                profit=max(-prices[index]+prev[0],prev[1]);
+                else
+                profit=max(prices[index]+curr2[1],prev[0]);
+
+
+                curr1[buy]=profit;
+            }
+            curr2=prev;
+            prev=curr1;
+            curr1=curr2;
+        }
+        return prev[1];
     }
 };
