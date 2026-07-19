@@ -1,3 +1,10 @@
+// Chef wants to play the games of word but he hates words containing duplicated characters. 
+// Can you help chef in designing an application which will remove duplicated characters from 
+// the given word and print the count of duplicated characters. 
+// Input : “balloon” 
+// Output: balon 
+// Count:2
+
 #include<iostream>
 #include<vector>
 #include<climits>
