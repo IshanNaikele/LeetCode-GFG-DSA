@@ -1,3 +1,14 @@
+// Chef wants to keep her data secure for which she applied password to her machine. If 
+// someone wants to hack the data by entering valid password then the signal will be sent to 
+// chef. Your task is to help chef in designing such an application which will check the validity 
+// of password. The password is valid if it satisfies following condition. 
+// • Minimum 8 characters. 
+// • The alphabet must be between [a-z] 
+// • At least one alphabet should be of Upper Case [A-Z] 
+// • At least 1 number or digit between [0-9]. 
+// • At least 1 character from [ _ or @ or $ ]. 
+// • Should not start with number 
+
 #include<iostream>
 #include<vector>
 #include<climits>
