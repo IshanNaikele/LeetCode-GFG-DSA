@@ -70,3 +70,34 @@ int main()
     cout<<p.first<<endl<<p.second;
     return 0;
 }
+
+
+
+#include<iostream>
+#include<vector>
+#include<climits>
+#include<cmath>
+#include<stack>
+#include <unordered_map>
+#include<algorithm>
+using namespace std;
+
+pair<string,int>solve(string &s)
+{
+    unordered_map<char,int>mpp;
+    int duplicateCount=0;
+    string ans="";
+    for(int i=0;i<s.size();i++){
+        mpp[s[i]]++;
+        if(mpp[s[i]]==1) ans+=s[i];
+        else             duplicateCount++;
+    } 
+    return {ans,duplicateCount};
+}
+int main()
+{
+    string s="programming";
+    auto p=solve(s);
+    cout<<p.first<<endl<<p.second;
+    return 0;
+}
