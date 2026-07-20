@@ -75,6 +75,50 @@ pair<int,int> findDishType(vector<int>&arr)
     }
     return {dishType,maxDish};
 }
+#include<iostream>
+#include<vector>
+#include<set>
+#include<climits>
+using namespace std;
+
+int solve(vector<int>&arr,int pickedDish,int index,vector<int>&dp)
+{
+    int n=arr.size();
+    if(index>=n) return 0;
+    if(dp[index]!=-1) return dp[index];
+    int skip=0,take=0;
+    
+    skip=solve(arr,pickedDish,index+1,dp);
+    if(arr[index]==pickedDish)
+    take=1+solve(arr,pickedDish,index+2,dp);
+    
+    return dp[index]=max(skip,take);
+}
+
+pair<int,int> findDishType(vector<int>&arr)
+{
+    int n=arr.size();
+    set<int>unique(arr.begin(),arr.end());
+    int maxDish=0,dishType=INT_MAX;
+    
+    for(auto it:unique)
+    {
+        vector<int>dp(n,-1);
+        int ans=solve(arr,it,0,dp);
+        if(ans==maxDish)
+        {
+            if(dishType>it )
+            dishType=it;
+        }
+        else if(maxDish<ans)
+        {
+            dishType=it;
+            maxDish=ans;
+        }
+    }
+    return {dishType,maxDish};
+}
+
 int main()
 {
     vector<int>arr={1, 2 ,2 ,2, 3 ,4 ,2 ,1};
