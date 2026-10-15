@@ -21,6 +21,6 @@ void printTable1(int start,int n){
 int main(){
     printTable1(1,3);
     cout<<endl;
-    printTable2(3);
+     
     return 0;
 }
