@@ -16,18 +16,18 @@ class Solution {
     }
 };
 
-class Solution:
-    def largest(self, arr):
-        maxElement=float('-inf')
-        n=len(arr)
+// class Solution:
+//     def largest(self, arr):
+//         maxElement=float('-inf')
+//         n=len(arr)
         
-        for i in range(0,n):
-            if arr[i]>maxElement :
-                maxElement=arr[i]
+//         for i in range(0,n):
+//             if arr[i]>maxElement :
+//                 maxElement=arr[i]
                 
                 
-        return maxElement
-        
+//         return maxElement
+
 int main(){
 
     return 0;

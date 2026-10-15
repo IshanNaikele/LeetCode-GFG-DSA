@@ -24,24 +24,24 @@ class Solution {
     }
 };
 
-class Solution:
-    def getSecondLargest(self, arr):
-        first=float('-inf')
-        second=float('-inf')
+// class Solution:
+//     def getSecondLargest(self, arr):
+//         first=float('-inf')
+//         second=float('-inf')
         
-        n=len(arr)
+//         n=len(arr)
         
-        for i in range(0,n):
-            if first<arr[i] :
-                second=first
-                first=arr[i] 
+//         for i in range(0,n):
+//             if first<arr[i] :
+//                 second=first
+//                 first=arr[i] 
                 
-            elif first>arr[i] and second<arr[i] :
-                second=arr[i]
+//             elif first>arr[i] and second<arr[i] :
+//                 second=arr[i]
         
-        if second==float('-inf'):
-            return -1 
-        return second
+//         if second==float('-inf'):
+//             return -1 
+//         return second
 int main(){
 
     return 0;
