@@ -20,4 +20,4 @@ int main(){
     vector<int>nums={1,2,3,5};
     cout<<prod(nums,0);
     return 0;
-}
+}     
