@@ -84,7 +84,7 @@ class Node {
     }
 };
 */
-
+   
 class Solution {
   public:
     void find(Node *root,int index,int &l,int &r)
