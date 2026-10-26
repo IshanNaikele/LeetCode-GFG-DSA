@@ -12,7 +12,7 @@ public:
 };
 */
 
-class Solution 
+class Solution    
 {
   public:
     int find(vector<int>&inorder,int inStart,int inEnd,int target)
