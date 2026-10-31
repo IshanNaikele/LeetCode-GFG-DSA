@@ -46,3 +46,49 @@ class Solution {
         return ans;
     }
 };
+
+
+/*
+Definition for Node
+class Node {
+  public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = right = nullptr;
+    }
+};
+*/
+class Solution {
+  public:
+ 
+    vector<int> inOrder(Node* root) {
+        vector<int>ans;
+        while(root){
+            if(root->left==NULL) {
+                ans.push_back(root->data);
+                root=root->right;
+            }
+            else {
+                Node *temp=root->left;
+                while(temp->right && temp->right!=root){
+                    temp=temp->right;
+                }
+                if(temp->right==NULL) {
+                    temp->right=root;
+                    root=root->left;
+                }
+                else   {               
+                    temp->right=NULL;
+                    ans.push_back(root->data);
+                    root=root->right;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
