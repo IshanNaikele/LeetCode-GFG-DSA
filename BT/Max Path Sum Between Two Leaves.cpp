@@ -34,7 +34,7 @@ class Solution {
         int sum = INT_MIN;
         int val = maxSum(root, sum);
 
-        if (sum == INT_MIN) return -1;
+        if (sum == INT_MIN) return -1   ;
 
         return sum;
     }
